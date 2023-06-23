@@ -38,9 +38,7 @@ const CardsList = () => {
 
         }));
 
-        const hazard = neos.map(arr => {return arr.closestNEO;})
-            .sort(function(a, b){return b - a})
-            .slice(0,2); 
+        
 
 
         const dataForCard = {
@@ -56,7 +54,9 @@ const CardsList = () => {
 
     useEffect(() => {
         if(!data) return;
-
+        // const hazard = neos.map(arr => {return arr.closestNEO;})
+        // .sort(function(a, b){return b - a})
+        // .slice(0,2); 
          if(list.length === 6){   
             setList(list.slice(1).concat([data]));
         } else {
