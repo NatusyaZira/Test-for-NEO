@@ -6,6 +6,7 @@ import axios from '../api';
 
 const CardsList = () => {
     const [list, setList] = useState([]);
+    const [isHighest, setHighestList] = useState([]);
     const [data, setData] = useState(null);
 
     const fetchData = async (dayInfo) => {
@@ -54,15 +55,21 @@ const CardsList = () => {
 
     useEffect(() => {
         if(!data) return;
-        // const hazard = neos.map(arr => {return arr.closestNEO;})
-        // .sort(function(a, b){return b - a})
-        // .slice(0,2); 
-         if(list.length === 6){   
-            setList(list.slice(1).concat([data]));
+      
+        let newList = null;
+         if(list.length === 6){
+          newList = list.slice(1).concat([data]);
         } else {
-            setList([...list, data]);
+          newList = [...list, data];
         }
-    }, [data]);
+      
+        const hazards = newList.map(arr => {numberOfPotentiallyHazardousNEOs: arr.numberOfPotentiallyHazardousNEOs, date: arr.date})
+        .sort((a, b) => b.numberOfPotentiallyHazardousNEOs - a.numberOfPotentiallyHazardousNEOs)
+        .slice(0,2);
+      
+        setList(newList);
+        setHighestList(hazards);
+      }, [data]);
 
 
 
@@ -91,8 +98,11 @@ const CardsList = () => {
         
         <div>
              {list.map(item => {
+
+                const isHighest = !!hazards.find(hazard => hazard.date === item.date);
+                
                 return (
-                        <CreateCard data={item} key={item.date}/>
+                        <CreateCard data={item} key={item.date} isHighest={isHighest}/>
                 )
             })}
         
