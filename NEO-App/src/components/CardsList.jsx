@@ -60,10 +60,10 @@ const CardsList = () => {
          if(list.length === 6){
           newList = list.slice(1).concat([data]);
         } else {
-          newList = [...list, data];
+          newList = ([...list, data]);
         }
       
-        const highestList = newList.map(arr => {numberOfPotentiallyHazardousNEOs: arr.numberOfPotentiallyHazardousNEOs, date: arr.date})
+        const highestList = newList.map(arr => ({ numberOfPotentiallyHazardousNEOs: arr.numberOfPotentiallyHazardousNEOs, date: arr.date }))
         .sort((a, b) => b.numberOfPotentiallyHazardousNEOs - a.numberOfPotentiallyHazardousNEOs)
         .slice(0,2);
       

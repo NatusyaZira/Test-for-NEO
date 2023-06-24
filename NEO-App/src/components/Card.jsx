@@ -8,7 +8,7 @@ import {  Box,
     Text } from '@chakra-ui/react';
 
 
-const CreateCard = ({ data})=> {
+const CreateCard = ({ data, isHighest})=> {
     const {
         maxEstimatedDiameter,
         numberOfPotentiallyHazardousNEOs,
@@ -18,7 +18,10 @@ const CreateCard = ({ data})=> {
     } = data;
     
     return (
-        <Card >
+        <Card 
+        opacity="0.87"
+      bgColor={isHighest ? "#C53030" : "white"}
+      color={isHighest ? "white" : "black"}>
             <CardHeader> <Heading className='heading' size='xs'>{date}</Heading>
             </CardHeader>
             <CardBody className='card'>
