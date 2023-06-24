@@ -2,6 +2,9 @@ import { Card, Grid, GridItem } from '@chakra-ui/react';
 import { useState, useEffect } from 'react';
 import CreateCard from './Card'
 import axios from '../api';
+
+import '../index.css';
+
 // import fetchData from 'App.jsx'
 
 const CardsList = () => {
@@ -95,19 +98,21 @@ const CardsList = () => {
 
 
     return (
-        
         <div>
+        
+        <Grid templateColumns='repeat(3, 1fr)' gap={20} className='container'>
+        
              {list.map(item => {
 
                 const isHighest = !!highestList.find(hazard => hazard.date === item.date);
                 
                 return (
-                        <CreateCard data={item} key={item.date} isHighest={isHighest}/>
+                    <GridItem><CreateCard data={item} key={item.date} isHighest={isHighest}/></GridItem>
                 )
             })}
         
+        </Grid>
         </div>
-
         
     )
 }
