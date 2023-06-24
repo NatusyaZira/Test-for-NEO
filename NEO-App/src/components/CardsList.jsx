@@ -6,7 +6,7 @@ import axios from '../api';
 
 const CardsList = () => {
     const [list, setList] = useState([]);
-    const [isHighest, setHighestList] = useState([]);
+    const [highestList, setHighestList] = useState([]);
     const [data, setData] = useState(null);
 
     const fetchData = async (dayInfo) => {
@@ -63,12 +63,12 @@ const CardsList = () => {
           newList = [...list, data];
         }
       
-        const hazards = newList.map(arr => {numberOfPotentiallyHazardousNEOs: arr.numberOfPotentiallyHazardousNEOs, date: arr.date})
+        const highestList = newList.map(arr => {numberOfPotentiallyHazardousNEOs: arr.numberOfPotentiallyHazardousNEOs, date: arr.date})
         .sort((a, b) => b.numberOfPotentiallyHazardousNEOs - a.numberOfPotentiallyHazardousNEOs)
         .slice(0,2);
       
         setList(newList);
-        setHighestList(hazards);
+        setHighestList(highestList);
       }, [data]);
 
 
@@ -99,7 +99,7 @@ const CardsList = () => {
         <div>
              {list.map(item => {
 
-                const isHighest = !!hazards.find(hazard => hazard.date === item.date);
+                const isHighest = !!highestList.find(hazard => hazard.date === item.date);
                 
                 return (
                         <CreateCard data={item} key={item.date} isHighest={isHighest}/>
